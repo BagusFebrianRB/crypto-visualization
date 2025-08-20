@@ -5,6 +5,7 @@ export default function Home() {
       <p className="mt-2 text-[#efe35c]">
         Selamat datang di Crypto Visualization!
       </p>
+      <p className="text-black dark:text-white">Test Dark Mode</p>
     </div>
   );
 }
