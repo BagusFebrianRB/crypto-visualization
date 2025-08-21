@@ -5,6 +5,7 @@ import {
   MoonIcon,
   SunIcon,
   Bars3Icon,
+  XMarkIcon,
 } from "@heroicons/react/24/solid";
 
 export default function Navbar() {
@@ -147,9 +148,9 @@ export default function Navbar() {
               className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 transition-all duration-300 hover:scale-105"
             >
               {darkMode ? (
-                <SunIcon className="w-6 h-6  dark:fill-white" />
+                <SunIcon className="w-6 h-6  dark:fill-white hover:dark:fill-yellow-500" />
               ) : (
-                <MoonIcon className="w-6 h-6 fill-[#1f1f1f]" />
+                <MoonIcon className="w-6 h-6 fill-[#1f1f1f] hover:fill-indigo-900" />
               )}
             </button>
 
@@ -159,7 +160,11 @@ export default function Navbar() {
                 onClick={() => setIsOpen(!isOpen)}
                 className="hover:scale-105 transition-all duration-300 "
               >
-                <Bars3Icon className="w-6 h-6 fill-[#1f1f1f] dark:fill-white" />
+                {isOpen ? (
+                  <XMarkIcon className="w-7 h-7 fill-[#1f1f1f] dark:fill-white" />
+                ) : (
+                  <Bars3Icon className="w-7 h-7 fill-[#1f1f1f] dark:fill-white" />
+                )}
               </button>
             </div>
           </div>
@@ -168,26 +173,38 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden px-4 pb-3 space-y-2 transition-all duration-500 ease-in-out">
-          <NavLink
-            to="/"
-            className="block text-[#1f1f1f] dark:text-white hover:text-[#efe35c]"
+        <>
+          {/* Overlay */}
+          <div
+            className="fixed top-16 inset-0 bg-black/40 z-40"
+            onClick={() => setIsOpen(false)} // klik overlay untuk menutup menu
+          ></div>
+
+          {/* Menu */}
+          <div
+            className="md:hidden overflow-hidden fixed px-4 pb-3 space-y-2 transition-all 
+            z-50 bg-white dark:bg-[#0a0a0a] top-16 left-0 w-full shadow-xl/30"
           >
-            Home
-          </NavLink>
-          <NavLink
-            to="/coins"
-            className="block text-[#1f1f1f] dark:text-white hover:text-[#efe35c]"
-          >
-            Coins
-          </NavLink>
-          <NavLink
-            to="/about"
-            className="block text-[#1f1f1f] dark:text-white hover:text-[#efe35c]"
-          >
-            About
-          </NavLink>
-        </div>
+            <NavLink
+              to="/"
+              className="block text-[#1f1f1f] dark:text-white hover:text-[#efe35c]"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/coins"
+              className="block text-[#1f1f1f] dark:text-white hover:text-[#efe35c]"
+            >
+              Coins
+            </NavLink>
+            <NavLink
+              to="/about"
+              className="block text-[#1f1f1f] dark:text-white hover:text-[#efe35c]"
+            >
+              About
+            </NavLink>
+          </div>
+        </>
       )}
     </nav>
   );
